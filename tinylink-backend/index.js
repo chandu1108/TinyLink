@@ -75,7 +75,7 @@ app.delete('/api/links/:code', async (req, res) => {
 app.get('/:code', async (req, res) => {
   const { code } = req.params;
   const link = await prisma.link.findUnique({ where: { code }});
-  if (!link) return res.status(404).send('Not found');
+  if (!link) return res.status(404).send('404 and no longer redirect.');
 
   // atomic update increment clicks and lastClicked
   await prisma.link.update({
@@ -88,7 +88,53 @@ app.get('/:code', async (req, res) => {
 });
 
 // healthz
-app.get('/healthz', (req, res) => res.json({ status: 'ok' }));
+// app.get('/healthz', (req, res) => res.json({ status: 'ok' }));
+
+
+  // HEALTHCHECK ROUTE
+
+  // Healthcheck endpoint
+app.get('/healthz', async (req, res) => {
+  try {
+    // DB check
+    await prisma.link.count();
+
+    res.json({
+      status: "ok",
+      uptime_seconds: process.uptime(),
+      timestamp: new Date().toISOString(),
+      node_version: process.version,
+      database_connected: true
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      database_connected: false,
+      message: err.message
+    });
+  }
+});
+
+
+
+// app.get('/healthz', async (req, res) => {
+//   let db_ok = true;
+//   try {
+//     await prisma.$queryRaw`SELECT 1`;
+//   } catch (err) {
+//     db_ok = false;
+//   }
+
+//   res.json({
+//     status: "ok",
+//     uptime_seconds: process.uptime(),
+//     timestamp: new Date().toISOString(),
+//     node_version: process.version,
+//     database_connected: db_ok
+//   });
+// });
+
+
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log('Server running on', PORT));
