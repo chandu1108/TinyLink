@@ -34,3 +34,118 @@ Backend API:
 - Click counter + last clicked timestamp  
 - Prisma ORM with PostgreSQL  
 - Automatic redirect route like:
+https://your-backend.com/abc123
+
+- Clean and modular project structure  
+
+### **Database**
+- Hosted PostgreSQL on Neon  
+- Prisma Migrations  
+- Includes tables for:
+- `Link`
+  - `code`
+  - `targetUrl`
+  - `clicks`
+  - `lastClicked`
+  - `createdAt`
+
+---
+
+## 📂 Project Structure
+
+
+
+TinyLink/
+├── tinylink-backend/ # Express + Prisma backend
+└── tinylink-frontend/ # React + Vite frontend
+
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+- React
+- Vite
+- TailwindCSS
+- Axios
+
+### Backend
+- Node.js
+- Express
+- Prisma ORM
+- Neon PostgreSQL
+- Cors
+
+### Deployment
+- Backend → **Render**
+- Frontend → **Vercel**
+
+---
+
+## ⚙️ Environment Variables
+
+### **Frontend (`.env`)**
+
+
+VITE_BACKEND_URL=https://tinylink-q25x.onrender.com
+
+
+### **Backend (`.env`)**
+
+
+DATABASE_URL="postgresql://..."
+PORT=4000
+
+
+---
+
+## ▶️ Running the Project Locally
+
+### **Backend**
+```bash
+cd tinylink-backend
+npm install
+npx prisma migrate dev
+npm run dev
+
+Frontend
+cd tinylink-frontend
+npm install
+npm run dev
+
+🌐 API Endpoints
+GET all links
+GET /api/links
+
+POST create a new short link
+POST /api/links
+body: {
+  "targetUrl": "https://example.com",
+  "code": "customCode" (optional)
+}
+
+DELETE link
+DELETE /api/links/:code
+
+Redirect
+GET /:code → redirects to targetUrl
+
+📸 Screenshots (Add later if you want)
+
+Dashboard with links
+
+Add Link Modal
+
+Stats Page
+
+Redirect working
+
+🙌 Author
+
+Chandan Kumar M
+GitHub: https://github.com/chandu1108
+
+⭐ Show Your Support
+
+If you liked this project, please ⭐ star the repo and share it!
