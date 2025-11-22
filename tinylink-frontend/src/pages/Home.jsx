@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react'
-// import Dashboard from '../components/Dashboard'
+// src/pages/Home.jsx
+import React, { useState } from 'react'
 import Dashboard from '../components/dashboard'
-
 import AddLinkModal from '../components/AddLinkModal'
 
+export default function Home() {
+  const [open, setOpen] = useState(false)
+  const [refreshKey, setRefreshKey] = useState(0)
 
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-semibold">Dashboard</h2>
+        <button onClick={() => setOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded-md">Add Link</button>
+      </div>
 
-export default function Home(){
-const [open, setOpen] = useState(false)
-return (
-    
-<div>
-<div className="flex items-center justify-center mb-6">
-<button id='addlink' onClick={()=>setOpen(true)} className="bg-blue-900 text-white px-4 py-2 rounded">Add Link</button>
-</div>
+      {/* pass refreshKey so Dashboard reloads when previewed via page reload; we can keep it simple */}
+      <Dashboard key={refreshKey} />
 
-
-<Dashboard />
-
-
-{open && <AddLinkModal onClose={()=>setOpen(false)} />}
-</div>
-)
+      {open && <AddLinkModal onClose={() => setOpen(false)} onCreated={() => setRefreshKey(k => k + 1)} />}
+    </div>
+  )
 }

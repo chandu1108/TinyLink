@@ -1,36 +1,41 @@
+// src/api/api.js
 export const BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
 
-
-
-export async function fetchLinks(){
-const res = await fetch(`${BASE}/api/links`)
-if(!res.ok) throw new Error('Failed to load links')
-return res.json()
+async function request(path, opts = {}) {
+  const res = await fetch(`${BASE}${path}`, opts)
+  if (!res.ok) {
+    // try to parse error json
+    let errText = `${res.status} ${res.statusText}`
+    try {
+      const j = await res.json().catch(()=>null)
+      if (j && j.error) errText = j.error
+    } catch {}
+    throw new Error(errText)
+  }
+  // If no content (204) return null
+  if (res.status === 204) return null
+  // try parse json
+  return res.json().catch(()=>null)
 }
 
-
-export async function createLink(payload){
-const res = await fetch(`${BASE}/api/links`, {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify(payload)
-})
-if(!res.ok) {
-const err = await res.json().catch(()=>({ error: 'unknown' }))
-throw new Error(err.error || 'create failed')
-}
-return res.json()
+export async function fetchLinks() {
+  return request('/api/links')
 }
 
-
-export async function deleteLink(code){
-const res = await fetch(`${BASE}/api/links/${code}`, { method: 'DELETE' })
-if(res.status !== 204) throw new Error('delete failed')
+export async function createLink(payload) {
+  return request('/api/links', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
 }
 
+export async function deleteLink(code) {
+  return request(`/api/links/${encodeURIComponent(code)}`, {
+    method: 'DELETE'
+  })
+}
 
-export async function fetchLink(code){
-const res = await fetch(`${BASE}/api/links/${code}`)
-if(!res.ok) throw new Error('not found')
-return res.json()
+export async function fetchLink(code) {
+  return request(`/api/links/${encodeURIComponent(code)}`)
 }
