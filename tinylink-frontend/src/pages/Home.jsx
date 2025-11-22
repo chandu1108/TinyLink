@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import React, { useState } from 'react'
-import Dashboard from '../components/dashboard'
+import Dashboard from '../components/Dashboard'
 import AddLinkModal from '../components/AddLinkModal'
 
 export default function Home() {
