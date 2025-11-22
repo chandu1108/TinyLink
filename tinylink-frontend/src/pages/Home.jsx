@@ -1,6 +1,6 @@
 // tinylink-frontend/src/pages/Home.jsx
 import React, { useState } from 'react'
-import Dashboard from '../components/dashboard.jsx'
+import Dashboard from '../components/Dashboard.jsx'
 import AddLinkModal from '../components/AddLinkModal.jsx'
 
 export default function Home(){
