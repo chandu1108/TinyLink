@@ -131,8 +131,6 @@ DELETE /api/links/:code
 Redirect
 GET /:code → redirects to targetUrl
 
-📸 Screenshots (Add later if you want)
-
 Dashboard with links
 
 Add Link Modal
