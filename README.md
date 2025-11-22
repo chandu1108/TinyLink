@@ -11,7 +11,7 @@ It allows users to:
 - Redirect using custom short URLs  
 
 Live Demo (Frontend):  
-👉 (Link to Demo)[https://tiny-link-oznq.vercel.app/]
+👉 [Link to Demo](https://tiny-link-oznq.vercel.app/)
 
 Backend API:  
 👉 https://tinylink-q25x.onrender.com/api/links
