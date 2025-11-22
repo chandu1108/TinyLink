@@ -10,7 +10,7 @@ button{
     width: 70px;
     background-color: rgb(26, 23, 110);
     color: white;
-    border: 0;
+    border: 1px solid white;
     border-radius: 5px;
 }
 
@@ -98,7 +98,6 @@ form {
 
 #container{
     margin-left: 1%;
-    
     width: 98%;
     margin-top: 10px;
     box-shadow: 0 0 10px white;
