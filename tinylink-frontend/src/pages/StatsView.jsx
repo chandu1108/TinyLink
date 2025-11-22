@@ -1,7 +1,7 @@
+// src/pages/StatsView.jsx
 import React, {useEffect, useState} from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { fetchLink } from '../api/api'
-
 
 export default function StatsView(){
   const { code } = useParams()
@@ -10,22 +10,40 @@ export default function StatsView(){
   const [error, setError] = useState('')
 
   useEffect(()=>{
-    fetchLink(code)
-      .then(data => { setLink(data); setLoading(false) })
-      .catch(err => { setError(err.message); setLoading(false) })
+    setLoading(true)
+    fetchLink(code).then(data=>{ setLink(data); setLoading(false) }).catch(err=>{ setError(err.message); setLoading(false) })
   }, [code])
 
   if(loading) return <div>Loading…</div>
   if(error) return <div className="text-red-600">{error}</div>
+  if(!link) return <div>Not found</div>
 
   return (
-    <div  className="text-blue-50 bg-blue-200 rounded-xl flex flex-col shadow-lg p-6 max-w-2xl mx-auto">
-      <h2 className="text-xl font-bold mb-2">{code}</h2>
-      <p className="text-blue-700 break-words"><b>Target URL:</b> <a href={link.targetUrl} className="text-blue-600 hover:underline">{link.targetUrl}</a></p>
-      <p className="mt-2"><b>Total Clicks:</b> {link.clicks}</p>
-      <p><b>Last Clicked:</b> {link.lastClicked ? new Date(link.lastClicked).toLocaleString() : '-'}</p>
+    <div className="card p-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="text-lg font-semibold">Stats — {link.code}</h3>
+          <div className="text-sm text-slate-500">Created: {new Date(link.createdAt).toLocaleString()}</div>
+        </div>
+        <div>
+          <Link to="/" className="text-sm text-slate-600 hover:underline">Back</Link>
+        </div>
+      </div>
 
-      <Link to="/" className="text-sm text-blue-600 hover:underline mt-6 inline-block">← Back to dashboard</Link>
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="p-4 border rounded-md">
+          <div className="text-sm text-slate-500">Target URL</div>
+          <a className="text-sm text-blue-600 break-words" href={link.targetUrl} target="_blank" rel="noreferrer">{link.targetUrl}</a>
+        </div>
+        <div className="p-4 border rounded-md">
+          <div className="text-sm text-slate-500">Total clicks</div>
+          <div className="text-2xl font-semibold">{link.clicks}</div>
+        </div>
+        <div className="p-4 border rounded-md">
+          <div className="text-sm text-slate-500">Last clicked</div>
+          <div>{link.lastClicked ? new Date(link.lastClicked).toLocaleString() : '-'}</div>
+        </div>
+      </div>
     </div>
   )
 }

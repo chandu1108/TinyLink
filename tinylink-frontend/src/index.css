@@ -6,10 +6,103 @@ html, body, #root { height: 100%; }
 body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f3f4f6; }
 
 button{
-    height: 25px;
+    height: 35px;
     width: 70px;
     background-color: rgb(26, 23, 110);
     color: white;
     border: 0;
     border-radius: 5px;
 }
+
+html, body, #root { height: 100%; }
+
+html, body, #root { min-height: 100%; }
+body { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+
+:root {
+  --radius: 12px;
+}
+
+.card {
+  border-radius: var(--radius);
+  background: powderblue;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+}
+
+.table-compact td, .table-compact th { padding: 0.75rem 1rem; }
+
+html, body {
+  background-color: powderblue;
+  min-height: 105vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+html, body, #root {
+  min-height: 100%;
+  height: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+footer, .site-footer, .footer {
+  position: static !important;
+  bottom: auto !important;
+  z-index: 1 !important;
+}
+
+#add-short-link,
+.add-short-link,
+.add-form,
+.form-fixed,
+.form-bottom,
+form {
+    margin-left: 25%;
+    width: 50%;
+  position: static !important;
+  bottom: auto !important;
+  right: auto !important;
+  left: auto !important;
+  z-index: auto !important;
+}
+#add-short-link input{
+    width: 500px;
+    background-color: powderblue;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    
+}
+
+#add-short-link{
+    margin-top: 20px;
+    height: 32vh;
+    box-shadow: 0 0 10px white;
+    border: 1px solid rgb(237, 234, 234);
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+}
+
+#add-short-link:hover{
+    transform: scale(1.05);
+}
+
+
+.fixed, .modal-root, .modal, .portal {
+  position: fixed; 
+  z-index: 1000;
+}
+
+#container{
+    margin-top: 10px;
+    box-shadow: 0 0 10px white;
+    border-radius: 10px;
+}
+
+
+body > div {
+  overflow: visible !important;
+}
+

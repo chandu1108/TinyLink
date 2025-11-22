@@ -14,6 +14,7 @@ async function request(path, opts = {}) {
   }
   // If no content (204) return null
   if (res.status === 204) return null
+
   // try parse json
   return res.json().catch(()=>null)
 }
