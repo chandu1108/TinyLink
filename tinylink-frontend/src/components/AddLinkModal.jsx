@@ -27,20 +27,20 @@ export default function AddLinkModal({ onClose, onCreated }) {
   }
 
   return (
-    <div id="add-short-link" >
-      <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md">
+    <div id="add-short-link" className='flex justify-center'>
+      <div className="bg-white rounded-xl shadow-xl p-6  max-w-md">
         <h3 className="text-lg flex justify-center font-semibold mb-4">Add Short Link</h3>
 {/* className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" */}
         <div className="space-y-3">
           <div>
-            <label className="block text-sm text-gray-600 ">Long URL</label>
+            <label className="block flex justify-center text-sm text-gray-600 ">Long URL</label>
             <input value={targetUrl} onChange={e => setTargetUrl(e.target.value)}
               className=" rounded-lg p-2 mt-1 focus:ring-2 focus:ring-blue-500"
               placeholder="https://example.com/long-url" />
           </div>
 
           <div>
-            <label className="block text-sm text-gray-600">Short Code (optional)</label>
+            <label className="block text-sm flex justify-center text-gray-600">Short Code (optional)</label>
             <input value={code} onChange={e => setCode(e.target.value)}
               className="w-full border rounded-lg p-2 mt-1 focus:ring-2 focus:ring-blue-500"
               placeholder="6–8 characters (optional)" />
