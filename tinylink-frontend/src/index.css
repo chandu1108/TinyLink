@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f3f4f6; }
+
+button{
+    height: 25px;
+    width: 70px;
+    background-color: rgb(26, 23, 110);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+}
