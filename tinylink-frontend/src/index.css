@@ -73,6 +73,7 @@ form {
   z-index: auto !important;
 }
 #add-short-link input{
+  color: white;
     width: 500px;
     background-color: rgb(12, 6, 43);
     height: 28px;
